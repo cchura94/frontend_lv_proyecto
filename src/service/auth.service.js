@@ -1,7 +1,7 @@
 import { http } from "./Http"
 
 export default {
-    loginConLarave(datos) {
+    loginConLaravel(datos) {
         return http().post("/v1/auth/login", datos);
     },
     registro(datos){
