@@ -20,6 +20,7 @@ const router = createRouter({
     {
       path: '/login',
       name: 'Login',
+      meta: {redirectIfAuth: true},
       component: () => import('../views/auth/Login.vue')
     },
     {
@@ -28,11 +29,42 @@ const router = createRouter({
       component: () => import('../views/auth/Registro.vue')
     },
     {
-      path: '/admin/perfil',
-      name: 'Perfil',
-      component: () => import('../views/admin/Perfil.vue')
-    }
+      path: '/admin',
+      component: () => import('../layout/AppLayout.vue'),
+      meta: {requireAuth: true},
+      children: [
+        {
+          path: 'perfil',
+          name: 'Perfil',
+          meta: {requireAuth: true},
+          component: () => import('../views/admin/Perfil.vue')
+        },
+        {
+          path: 'usuarios',
+          name: 'Usuario',
+          meta: {requireAuth: true},
+          component: () => import('../views/admin/Usuario.vue')
+        }
+      ]
+    },
+    
   ]
+})
+
+router.beforeEach((to, from, next) => {
+  let token = localStorage.getItem("access_token")
+  console.log(to)
+  if(to.meta.requireAuth){
+    if(!token){
+      next({name: 'Login'})
+    }
+    next()
+  }
+
+  if(to.meta.redirectIfAuth && token){
+    next({name: 'Perfil'})
+  }
+  return next();
 })
 
 export default router
