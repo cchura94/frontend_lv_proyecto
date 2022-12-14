@@ -4,4 +4,8 @@ export default {
     getUsuarios(){
         return http().get("/usuario");
     },
+
+    storeUsuario(datos){
+        return http().post("/usuario", datos);
+    }
 }
