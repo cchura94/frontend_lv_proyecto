@@ -44,7 +44,26 @@ const router = createRouter({
           name: 'Usuario',
           meta: {requireAuth: true},
           component: () => import('../views/admin/Usuario.vue')
+        },
+        {
+          path: 'producto',
+          name: 'Producto',
+          meta: {requireAuth: true},
+          component: () => import('../views/admin/Producto.vue')
+        },
+        {
+          path: 'pedido',
+          name: 'Pedido',
+          meta: {requireAuth: true},
+          component: () => import('../views/admin/pedido/Pedido.vue')
+        },
+        {
+          path: 'pedido/nuevo',
+          name: 'Nuevo',
+          mata: {requireAuth: true},
+          component: () => import('../views/admin/pedido/PedidoNuevo.vue')
         }
+        
       ]
     },
     
@@ -57,14 +76,18 @@ router.beforeEach((to, from, next) => {
   if(to.meta.requireAuth){
     if(!token){
       next({name: 'Login'})
+    }else{
+
+      return next()
     }
-    next()
   }
 
   if(to.meta.redirectIfAuth && token){
-    next({name: 'Perfil'})
+    return next({name: 'Perfil'})
+  }else{
+
+    return next();
   }
-  return next();
 })
 
 export default router

@@ -5,44 +5,31 @@ import AppMenuItem from './AppMenuItem.vue';
 
 const model = ref([
     {
-        label: 'Home',
+        label: 'Inicio',
         items: [{ label: 'Mi Perfil', icon: 'pi pi-fw pi-home', to: '/admin/perfil' }]
     },
     {
         label: 'Gestion',
         items: [
             { label: 'Usuarios', icon: 'pi pi-fw pi-id-card', to: '/admin/usuarios' },
-            { label: 'Input', icon: 'pi pi-fw pi-check-square', to: '/uikit/input' },
-            { label: 'Float Label', icon: 'pi pi-fw pi-bookmark', to: '/uikit/floatlabel' },
-            { label: 'Invalid State', icon: 'pi pi-fw pi-exclamation-circle', to: '/uikit/invalidstate' },
-            { label: 'Button', icon: 'pi pi-fw pi-mobile', to: '/uikit/button', class: 'rotated-icon' },
-            { label: 'Table', icon: 'pi pi-fw pi-table', to: '/uikit/table' },
-            { label: 'List', icon: 'pi pi-fw pi-list', to: '/uikit/list' },
-            { label: 'Tree', icon: 'pi pi-fw pi-share-alt', to: '/uikit/tree' },
-            { label: 'Panel', icon: 'pi pi-fw pi-tablet', to: '/uikit/panel' },
-            { label: 'Overlay', icon: 'pi pi-fw pi-clone', to: '/uikit/overlay' },
-            { label: 'Media', icon: 'pi pi-fw pi-image', to: '/uikit/media' },
-            { label: 'Menu', icon: 'pi pi-fw pi-bars', to: '/uikit/menu', preventExact: true },
-            { label: 'Message', icon: 'pi pi-fw pi-comment', to: '/uikit/message' },
-            { label: 'File', icon: 'pi pi-fw pi-file', to: '/uikit/file' },
-            { label: 'Chart', icon: 'pi pi-fw pi-chart-bar', to: '/uikit/charts' },
-            { label: 'Misc', icon: 'pi pi-fw pi-circle', to: '/uikit/misc' }
+            
         ]
     },
     {
-        label: 'Prime Blocks',
+        label: 'Gestion Productos',
         items: [
-            { label: 'Free Blocks', icon: 'pi pi-fw pi-eye', to: '/blocks', badge: 'NEW' },
-            { label: 'All Blocks', icon: 'pi pi-fw pi-globe', url: 'https://www.primefaces.org/primeblocks-vue', target: '_blank' }
+            { label: 'Productos', icon: 'pi pi-fw pi-table', to: '/admin/producto' },
+            { label: 'Categorias', icon: 'pi pi-fw pi-globe', to: '/admin/categoria' }
         ]
     },
     {
-        label: 'Utilities',
+        label: 'Gestión Pedidos',
         items: [
-            { label: 'PrimeIcons', icon: 'pi pi-fw pi-prime', to: '/utilities/icons' },
-            { label: 'PrimeFlex', icon: 'pi pi-fw pi-desktop', url: 'https://www.primefaces.org/primeflex/', target: '_blank' }
+            { label: 'Pedidos', icon: 'pi pi-fw pi-prime', to: '/admin/pedido' },
+            { label: 'Nuevo Pedido', icon: 'pi pi-fw pi-desktop', to: '/admin/pedido/nuevo' }
         ]
     },
+    /*
     {
         label: 'Pages',
         icon: 'pi pi-fw pi-briefcase',
@@ -156,6 +143,7 @@ const model = ref([
             }
         ]
     }
+    */
 ]);
 </script>
 
