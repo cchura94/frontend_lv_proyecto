@@ -2,12 +2,16 @@
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import { useLayout } from '@/layout/composables/layout';
 import { useRouter } from 'vue-router';
+import { useAuthStore } from "@/stores/auth.js"
 
 const { layoutConfig, onMenuToggle, contextPath } = useLayout();
 
 const outsideClickListener = ref(null);
 const topbarMenuActive = ref(false);
 const router = useRouter();
+
+
+const miStorePinia = useAuthStore()
 
 onMounted(() => {
     bindOutsideClickListener();
@@ -26,7 +30,8 @@ const onTopBarMenuButton = () => {
 };
 const onSettingsClick = () => {
     topbarMenuActive.value = false;
-    router.push('/documentation');
+    localStorage.removeItem("access_token")
+    router.push('/login');
 };
 const topbarMenuClasses = computed(() => {
     return {
@@ -64,7 +69,7 @@ const isOutsideClicked = (event) => {
     <div class="layout-topbar">
         <router-link to="/" class="layout-topbar-logo">
             <img :src="logoUrl" alt="logo" />
-            <span>SAKAI</span>
+            <span>MI-EMPRESA</span>
         </router-link>
 
         <button class="p-link layout-menu-button layout-topbar-button" @click="onMenuToggle()">
@@ -74,6 +79,10 @@ const isOutsideClicked = (event) => {
         <button class="p-link layout-topbar-menu-button layout-topbar-button" @click="onTopBarMenuButton()">
             <i class="pi pi-ellipsis-v"></i>
         </button>
+        <p v-if="miStorePinia.usuario">
+
+        {{ miStorePinia.usuario.usuario.email }}
+        </p>
 
         <div class="layout-topbar-menu" :class="topbarMenuClasses">
             <button @click="onTopBarMenuButton()" class="p-link layout-topbar-button">
@@ -85,7 +94,7 @@ const isOutsideClicked = (event) => {
                 <span>Profile</span>
             </button>
             <button @click="onSettingsClick()" class="p-link layout-topbar-button">
-                <i class="pi pi-cog"></i>
+                <i class="pi pi-power"></i>
                 <span>Settings</span>
             </button>
         </div>

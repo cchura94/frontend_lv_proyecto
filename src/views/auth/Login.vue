@@ -50,9 +50,13 @@
 import authService from "@/service/auth.service.js";
 import {ref} from "vue"
 import { useRouter } from 'vue-router'
+import { useAuthStore } from "@/stores/auth.js"
 
 export default {
     setup() {
+
+        const miStorePinia = useAuthStore()
+
         const router = useRouter()
 
         const usuario = ref({})
@@ -62,6 +66,10 @@ export default {
             try{
                 const {data} = await authService.loginConLaravel(usuario.value)
                 console.log(data);
+                // crgar en pinia
+                miStorePinia.logueado(data)
+                
+                localStorage.setItem("user", JSON.stringify(data))
                 localStorage.setItem("access_token", data.access_token)
                 router.push({name: 'Perfil'})
 

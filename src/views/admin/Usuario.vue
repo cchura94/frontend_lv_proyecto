@@ -1,6 +1,8 @@
 <template>
 <div class="card">
-    <h1>Usuarios</h1>
+    <h1>Usuarios - 
+        {{ micontador.contador }}
+    </h1>
 
     <Button label="Nuevo Usuario" icon="pi pi-user" @click="openModal" />
         <Dialog header="Nuevo Usuario" v-model:visible="displayModal" :breakpoints="{'960px': '75vw', '640px': '90vw'}" :style="{width: '50vw'}" :modal="true" class="p-fluid">
@@ -42,8 +44,12 @@
 import usuarioService from "@/service/usuario.service"
 import { onMounted, ref } from 'vue'
 
+import { useContadorStore } from '@/stores/contador.js'
 export default {
     setup() {
+
+        const micontador = useContadorStore()
+
         const usuarios = ref([])
         const displayModal = ref(false)
         const usuario = ref({name: '', email: '', password: ''})
@@ -93,7 +99,8 @@ export default {
             guardarUsuario,
             usuario,
             errores,
-            cargando
+            cargando,
+            micontador
         }
     }
 
